@@ -16,6 +16,15 @@ final class UserController {
         return token.save(on: req)
     }
     
+//    func showAll(_ req: Request) throws -> Future<AllUsersResponse> {
+//        return try req.content.decode(AllUsersResponse.self).flatMap { user -> Future<User> in
+//            return User.prepare(on: SQLiteConnection)
+//            //(id: nil, name: user.name, email: user.email)
+//        }.map {
+//            return try AllUsersResponse(id: user.requireID(), name: user.name, email: user.email)
+//        }
+//    }
+    
     /// Creates a new user.
     func create(_ req: Request) throws -> Future<UserResponse> {
         // decode request content
@@ -64,5 +73,11 @@ struct UserResponse: Content {
     var name: String
     
     /// User's email address.
+    var email: String
+}
+
+struct AllUsersResponse: Content {
+    var id: Int
+    var name: String
     var email: String
 }
